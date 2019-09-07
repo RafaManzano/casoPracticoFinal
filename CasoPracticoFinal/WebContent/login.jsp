@@ -27,11 +27,11 @@
 	<body>
 	<div class="container">
   		<div class="abs-center">
-    		<form action="#" class="border p-3 form">
+    		<form action="LoginController" class="border p-3 form" method = "POST">
     		<h1>Entra con tu cuenta</h1>
       			<div class="form-group">
         			<label for="email">Email</label>
-        			<input type="email" name="email" id="email" class="form-control">
+        			<input type="text" name="email" id="email" class="form-control">
      			</div>
       			<div class="form-group">
        				<label for="password">Password</label>
