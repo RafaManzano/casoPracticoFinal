@@ -1,5 +1,18 @@
+<%@page import="clases.PasajerosPorVuelo"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
+<%@page import="model.Model"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+	Model m;
+
+	m = new Model();
+
+	Map<String, List<PasajerosPorVuelo>> paVuelo = m.getPasajerosVuelos();
+
+%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -13,9 +26,43 @@
     <title>Hello, world!</title>
   </head>
   <body>
+  <h1>Listado de vuelos por destino</h1>
 <!--     <h1>Hello, world!</h1> -->
 <!-- Nombre del destino -->
-<p></p>
+<%
+for(Map.Entry<String, List<PasajerosPorVuelo>> entry: paVuelo.entrySet()) {
+			String nombreDestino = entry.getKey();
+			List<PasajerosPorVuelo> pasajeros = entry.getValue();
+			%>
+			<h3><p><%=nombreDestino %></p></h3>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Primer Apellido</th>						
+						<th>Segundo Apellido</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						for(PasajerosPorVuelo pa: pasajeros) {
+					%>
+						<tr>
+							<td><%=pa.getNombre() %></td>
+							<td><%=pa.getPrimerApellido() %></td>
+							<td><%=pa.getSegundoApellido() %></td>							
+						</tr>
+					<%							
+						}
+					%>
+				</tbody>
+			</table>
+			<br>
+			<%
+			
+		}
+	%>
+
 <!-- Tabla con los datos de los pasajeros -->
 <!--     <button type="button" class="btn btn-primary" id = "registrar" name = "registrar">Reservar</button> -->
 <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> -->

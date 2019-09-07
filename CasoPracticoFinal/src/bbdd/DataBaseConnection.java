@@ -73,6 +73,27 @@ public class DataBaseConnection {
 		return rs;
 	}
 	
+	public ResultSet damePasajerosVuelos() throws SQLException {
+		ResultSet rs = null;
+		String query = "SELECT V.destino, P.nombre, P.primerApellido, P.segundoApellido FROM pasajeros AS P\r\n" + 
+				"INNER JOIN vuelos AS V ON P.idVuelo = V.id;";
+		
+		Statement stmt;
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+		} 
+		
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			Logger.getLogger(DataBaseConnection.class.getName())
+		 	.log(Level.INFO, null, e);
+		}
+		
+		return rs;
+	}
+	
 
 	
 }
