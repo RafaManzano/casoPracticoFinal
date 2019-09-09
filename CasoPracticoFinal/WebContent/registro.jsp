@@ -30,13 +30,13 @@
 		
 	}	
 	</style>
-    <title>Hello, world!</title>
+    <title>Registrar Vuelo</title>
   </head>
 	<body>
 	<div class="container">
   		<div class="abs-center">
 <!--   		El metodo no funciona asi que la validacion manda los datos incorrectos> -->
-    		<form class="border p-3 form" id = "form" onsubmit = "return validarFormulario();"> 
+    		<form class="border p-3 form" id = "form"> 
     		<h1>Registro de vuelo</h1>
     			<div class = "form-group">
     				<label for="destino"> Destino</label>
@@ -78,6 +78,19 @@
     		</form>
   		</div>
 	</div>
+	
+	<h3>Trabajadores de toda la empresa</h3>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Primer Apellido</th>
+				<th>Segundo Apellido</th>
+			</tr>
+		</thead>
+		<tbody id="filasTabla2">
+		</tbody>
+	</table>
 		
 		<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -281,18 +294,87 @@
 				event.preventDefault();
 				event.stopPropagation();
 				
-				if(validarNombre == false){
+				if(validarNombre() == false){
 					return false;
 				} 
 				
 				return event.target.submit();
 			}
+			
+			document.getElementById("form").addEventListener("submit", validarFormulario);
 		
 				document.getElementById("nombre").addEventListener("blur", validarNombre);
 				document.getElementById("primerApellido").addEventListener("blur", validarPrimerApellido);
 				document.getElementById("segundoApellido").addEventListener("blur", validarSegundoApellido);
 				document.getElementById("telefono").addEventListener("blur", validarTelefono);
 				document.getElementById("correo").addEventListener("blur", validarEmail);
+				
+		/*
+		Crear una funcion change para mostrar los pasajeros cuando cambia en el desplegable el destino
+		*/
+		document.getElementById("destino").addEventListener("change", function() {
+					/*
+					// Indice de la option seleccionada			
+					var indice = this.selectedIndex;
+
+					// TODO. Borrar o comentar la siguiente linea
+					// posteriormente
+					console.log(indice);
+
+					// Recuperar el atributo value de la option seleccionada
+					var valueOptionSelected = this.options[indice].value;
+
+					// Si necesitas el texto de la option seleccionada
+					var textOptionSelected = this.options[indice].text;
+
+					// TODO. Borrar
+					console.log("IdDpto: " + valueOptionSelected
+							+ ", Nombre del Dpto: "
+							+ textOptionSelected);
+
+					idDptoSeleccionado = valueOptionSelected;
+					*/
+
+					// Generar una peticion por AJAX, para que el servidor
+					// nos devuelva un listado de empleados que pertenecen
+					// al Departamento Seleccionado
+					var https = new XMLHttpRequest();
+
+					https.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							var respuesta = this.responseText;
+
+							// TODO. Borrar posteriormente
+							//console.log(rtaRecibida);
+
+							// Renderizar la respuesta en un elemento HTML
+							var objetoRec = JSON.parse(respuesta);
+							
+							//console.log(objRtaRecibida);
+
+							var filasTabla = "";
+							
+							for (var i = 0; i < objetoRec.length; i++) {
+								filasTabla += "<tr><td>"
+										+ objetoRec[i].nombre
+										+ "</td><td>"
+										+ objetoRec[i].primerApellido
+										+ "</td><td>"
+										+ objetoRec[i].segundoApellido 
+										+ "</td></tr>";
+
+							}
+
+							document.getElementById("filasTabla2").innerHTML = filasTabla;
+
+						}
+					};
+
+					https.open("GET", "AJAXPasajerosVueloController?idVuelo="
+							+ idVuelo, true);
+					https.send();
+
+				});
 
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

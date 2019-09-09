@@ -17,6 +17,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import bbdd.DataBaseConnection;
+import clases.Pasajero;
 import clases.PasajeroFull;
 import clases.PasajerosPorVuelo;
 import clases.Usuario;
@@ -33,6 +34,7 @@ public class Model {
 	private Usuario usuario;
 	private List<Vuelo> vuelos;
 	private PasajeroFull pasajero;
+	private List<Pasajero> pasajeros;
     /**
      * Default constructor. 
      */
@@ -136,6 +138,32 @@ public class Model {
 		 	.log(Level.INFO, null, e);
 		}
 		this.pasajero = pasajero;
+	}
+	public List<Pasajero> getPasajeros(int idVuelo) {
+		DataBaseConnection dataBaseConnection;
+    	dataBaseConnection = new DataBaseConnection("rmanzano", "Temp2019$$");
+    	
+    	try {
+			ResultSet rs = dataBaseConnection.damePasajerosPorVuelo(idVuelo);
+			pasajeros = new ArrayList<>();
+			while(rs.next()) {
+				pasajeros.add(new Pasajero(
+						rs.getString("nombre"), 
+						rs.getString("primerApellido"),
+						rs.getString("segundoApellido")));
+			}
+		}
+    	catch (SQLException e) {
+			Logger.getLogger(DataBaseConnection.class.getName())
+		 	.log(Level.INFO, null, e);
+		}
+    	
+		return pasajeros;
+	}
+	
+
+	public void setPasajeros(List<Pasajero> pasajeros) {
+		this.pasajeros = pasajeros;
 	}
 
     

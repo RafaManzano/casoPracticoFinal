@@ -32,7 +32,7 @@ public class DataBaseConnection {
 		String urlConn;
 		
 		
-		urlConn = "jdbc:mysql://localhost:3306/Aeropuerto?"
+		urlConn = "jdbc:mysql://localhost:3306/aeropuerto?"
 				+ "useUnicode=true&useJDBCCompliantTimezoneShift="
 				+ "true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		
@@ -178,6 +178,34 @@ public class DataBaseConnection {
 		finally {
 			conn.setAutoCommit(true);
 		}
+	}
+
+	public ResultSet damePasajerosPorVuelo(int idVuelo) {
+		ResultSet rs = null;
+		
+		String query = "SELECT P.nombre, P.primerApellido, P.segundoApellido FROM pasajeros AS P "
+				+ "INNER JOIN vuelos AS V ON P.idVuelo = ?;";
+		
+		PreparedStatement stmt;
+		
+		try {
+			conn = getConnection();
+			
+			stmt  = conn.prepareStatement(query);
+			
+			stmt.setInt(1, idVuelo);
+			rs = stmt.executeQuery();
+			
+		} 
+		catch (ClassNotFoundException e) {
+			Logger.getLogger(DataBaseConnection.class.getName()).log(Level.INFO, null, e);
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			Logger.getLogger(DataBaseConnection.class.getName()).log(Level.INFO, null, e);
+		}
+		
+		return rs;
 	}
 	
 }

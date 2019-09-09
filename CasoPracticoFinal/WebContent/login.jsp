@@ -22,7 +22,7 @@
 	}
 		
 	</style>
-    <title>Hello, world!</title>
+    <title>Login</title>
   </head>
 	<body>
 	<div class="container">
