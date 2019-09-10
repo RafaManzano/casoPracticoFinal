@@ -31,7 +31,7 @@ CREATE TABLE `correos` (
   PRIMARY KEY (`id`),
   KEY `fk_Correos_Pasajeros_idx` (`idPasajero`),
   CONSTRAINT `fk_Correos_Pasajeros` FOREIGN KEY (`idPasajero`) REFERENCES `pasajeros` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,7 +57,7 @@ CREATE TABLE `pasajeros` (
   `primerApellido` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `segundoApellido` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +85,7 @@ CREATE TABLE `telefonos` (
   PRIMARY KEY (`id`),
   KEY `fk_Telefonos_Pasajeros_idx` (`idPasajero`),
   CONSTRAINT `fk_Telefonos_Pasajeros` FOREIGN KEY (`idPasajero`) REFERENCES `pasajeros` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +109,7 @@ CREATE TABLE `usuarios` (
   `login` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,6 +118,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'rafamanzanomedina@gmail.com','1234'),(2,'arturo@gmail.com','1010'),(3,'rafa','1234');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,8 +135,9 @@ CREATE TABLE `vuelos` (
   `fechaHoraSalida` datetime DEFAULT NULL,
   `fechaHoraLlegada` datetime DEFAULT NULL,
   `totalPasajeros` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `estaLleno` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +146,7 @@ CREATE TABLE `vuelos` (
 
 LOCK TABLES `vuelos` WRITE;
 /*!40000 ALTER TABLE `vuelos` DISABLE KEYS */;
-INSERT INTO `vuelos` VALUES (1,'Roma','2019-09-21 09:00:00','2019-09-21 10:30:00','160'),(2,'Florencia','2019-09-07 07:00:00','2019-09-07 09:00:00','60');
+INSERT INTO `vuelos` VALUES (1,'Roma','2019-09-21 09:00:00','2019-09-21 10:30:00','160',0),(2,'Florencia','2019-09-07 07:00:00','2019-09-07 09:00:00','60',1),(3,'Colombia','2019-09-12 07:00:00','2019-09-07 14:00:00','25',0);
 /*!40000 ALTER TABLE `vuelos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -157,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-07 12:34:02
+-- Dump completed on 2019-09-10 17:40:02
