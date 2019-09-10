@@ -1,7 +1,6 @@
-<%@page import="clases.PasajerosPorVuelo"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.Map"%>
-<%@page import="model.Model"%>
+<%@page import="clases.*"%>
+<%@page import="java.util.*"%>
+<%@page import="model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
@@ -13,7 +12,7 @@
 	Map<String, List<PasajerosPorVuelo>> paVuelo = m.getPasajerosVuelos();
 
 %>
-<!doctype html>
+<doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->

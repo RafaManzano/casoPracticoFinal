@@ -98,29 +98,29 @@
     var idVuelo = 0;
     document.getElementById("destino").addEventListener("change", function() {
 
-				// Indice de la option seleccionada
-				var indice = this.selectedIndex;
+		// Indice de la option seleccionada
+		var indice = this.selectedIndex;
 
-				// TODO. borrar o comentar la siguiente linea posteriormente
-				//console.log(indice);
+		// TODO. borrar o comentar la siguiente linea posteriormente
+		//console.log(indice);
 
-				// Recuperar el atributo value de la option seleccionada
+		// Recuperar el atributo value de la option seleccionada
 
-				var valueOptionSelected = this.options[indice].value;
-				// si necesitas el texto de la option seleccionada 
+		var valueOptionSelected = this.options[indice].value;
+		// si necesitas el texto de la option seleccionada 
 
-				var textOptionSelected = this.options[indice].text;
+		var textOptionSelected = this.options[indice].text;
 
-				// TODO. Borrar
-				//console.log("IdDpto " + valueOptionSelected
-				//		+ ", Nombre del Dpto: " + textOptionSelected)
+		// TODO. Borrar
+		//console.log("IdDpto " + valueOptionSelected
+		//		+ ", Nombre del Dpto: " + textOptionSelected)
 
-				idVuelo = valueOptionSelected;
-				});
+		idVuelo = valueOptionSelected;
+		});
     
-    
-   			 	document.getElementById("btn1").addEventListener("click", function() {
-    	
+		//if(validarFormulario(this) != false) {
+			document.getElementById("btn1").addEventListener("click", function() {
+		    	
 				var objPasajero = new Object();
 
 				objPasajero.idVuelo = idVuelo;
@@ -180,6 +180,8 @@
 
 			});
 
+    			//}
+   			 	
    			 	
 			 /*
 			Validacion del Formulario con JavaScript y Expresiones Regulares
@@ -301,13 +303,13 @@
 				return event.target.submit();
 			}
 			
+			document.getElementById("nombre").addEventListener("blur", validarNombre);
+			document.getElementById("primerApellido").addEventListener("blur", validarPrimerApellido);
+			document.getElementById("segundoApellido").addEventListener("blur", validarSegundoApellido);
+			document.getElementById("telefono").addEventListener("blur", validarTelefono);
+			document.getElementById("correo").addEventListener("blur", validarEmail);
+			
 			document.getElementById("form").addEventListener("submit", validarFormulario);
-		
-				document.getElementById("nombre").addEventListener("blur", validarNombre);
-				document.getElementById("primerApellido").addEventListener("blur", validarPrimerApellido);
-				document.getElementById("segundoApellido").addEventListener("blur", validarSegundoApellido);
-				document.getElementById("telefono").addEventListener("blur", validarTelefono);
-				document.getElementById("correo").addEventListener("blur", validarEmail);
 				
 		/*
 		Crear una funcion change para mostrar los pasajeros cuando cambia en el desplegable el destino
